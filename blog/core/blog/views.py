@@ -36,7 +36,16 @@ class RedirectMaktab(RedirectView):
     
 class PostListView(ListView):
     model = Post
-    template_name = "index.html"
+    context_object_name = 'posts'
+    
+    # queryset = Post.objects.all()
+    
+    # def get_queryset(self):
+    #     posts = Post.objects.filter(status=True)
+    #     return posts
+    
+    # template_name = "blog/post_list.html"
+    
 
 
  
