@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
 from django.shortcuts import get_object_or_404
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from .models import Post
 # Create your views here.
 
@@ -25,8 +26,8 @@ class IndexView(TemplateView):
         context['posts'] = Post.objects.all()
         return context
     
-class RedirectMaktab(RedirectView):
-    url = 'http://maktabkhooneh.org'
+class RedirectGithub(RedirectView):
+    url = 'https://github.com/MMdrezaw1383'
     # permanent = False
     # query_string = True
     def get_redirect_url(self, *args, **kwargs):
@@ -37,7 +38,8 @@ class RedirectMaktab(RedirectView):
 class PostListView(ListView):
     model = Post
     context_object_name = 'posts'
-    
+    paginate_by = 2
+    ordering = '-id'
     # queryset = Post.objects.all()
     
     # def get_queryset(self):
@@ -47,5 +49,7 @@ class PostListView(ListView):
     # template_name = "blog/post_list.html"
     
 
-
+class PostDetailView(DetailView):
+    model = Post
+ 
  
