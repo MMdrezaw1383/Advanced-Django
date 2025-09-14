@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import IndexView,Indexview,RedirectGithub,PostListView,PostDetailView
+from .views import *
 from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
 app_name = "blog"
@@ -21,5 +21,14 @@ urlpatterns = [
     ),
     path(
         'post/<int:pk>/',PostDetailView.as_view(),name="postdetail"
+    ),
+    path(
+        'post/create/',PostCreateView.as_view(),name="createpost"
+        ),
+    path(
+        'post/<int:pk>/edit/',PostUpdateView.as_view(),name="editpost"
+    ),
+    path(
+        'post/<int:pk>/delete/',PostDeleteView.as_view(),name="deletepost"
     )
 ]

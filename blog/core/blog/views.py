@@ -4,6 +4,8 @@ from django.views.generic.base import RedirectView
 from django.shortcuts import get_object_or_404
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView,UpdateView,DeleteView
+from .forms import PostForm
 from .models import Post
 # Create your views here.
 
@@ -52,4 +54,33 @@ class PostListView(ListView):
 class PostDetailView(DetailView):
     model = Post
  
- 
+
+class PostCreateView(CreateView):
+    model = Post
+    # template_name = "post_form.html"
+    form_class = PostForm
+    # fields = ['title', 'content','status','category','published_date']
+    success_url = '/blog/posts/'
+    
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
+
+class PostUpdateView(UpdateView):
+    model = Post
+    # template_name = "post_form.html"
+    # fields = ['title', 'content','status','category','published_date']
+    form_class = PostForm
+    success_url = '/blog/posts/'
+    
+
+
+
+class PostDeleteView(DeleteView):
+    model = Post
+    # template_name = "post_confirm_delete.html"
+    success_url = '/blog/posts/'
+
+    
