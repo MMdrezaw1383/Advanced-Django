@@ -7,6 +7,8 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from .forms import PostForm
 from .models import Post
+
+from django.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixin
 # Create your views here.
 
 def Indexview(request):
@@ -37,7 +39,8 @@ class RedirectGithub(RedirectView):
         print(post)
         return super().get_redirect_url(*args,**kwargs)
     
-class PostListView(ListView):
+class PostListView(LoginRequiredMixin,PermissionRequiredMixin,ListView):
+    permission_required = 'blog.view_post'
     model = Post
     context_object_name = 'posts'
     paginate_by = 2
