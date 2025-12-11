@@ -63,7 +63,7 @@ class PostListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     # template_name = "blog/post_list.html"
 
 
-class PostDetailView(DetailView):
+class PostDetailView(LoginRequiredMixin,DetailView):
     model = Post
 
 
