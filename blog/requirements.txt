@@ -1,4 +1,18 @@
+# general modules
 Django >3.4
 gunicorn==23.0.0
 python-decouple 
 Pillow
+djangorestframework
+
+# third-party modules
+markdown
+coreapi
+django-filter
+drf-yasg[validation]
+djangorestframework-simplejwt
+
+# third party mail back 
+django-mail-templated
+black
+flake8
